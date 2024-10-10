@@ -4,6 +4,7 @@
 #include "SFML/Graphics.hpp"
 #include "PlayerBar.h"
 #include "Ball.h"
+#include "GameWindow.h"
 
 using namespace std;
 
@@ -77,6 +78,8 @@ int main() {
 
     Ball ball;
 
+    GameWindow GameSession;
+
     sf::Event event;
     std::default_random_engine generator;
     std::uniform_real_distribution<double> distribution(-1, 1);
@@ -136,10 +139,14 @@ int main() {
         // Rendering
         window.clear();
         window.draw(background);
+
         player1Bar.drawPlayerBar(window);
         player2Bar.drawPlayerBar(window);
+        
         drawScoreAndCenterLine(window, score);
+        
         ball.drawBall(window, bColided1, bColided2);
+        
         window.display();
 
     }
