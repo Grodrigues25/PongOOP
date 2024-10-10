@@ -7,25 +7,6 @@
 using namespace std;
 
 
-void drawPlayerBar(sf::RenderWindow& window, vector<float> player1Coords, vector<float> player2Coords) {
-
-    int length = 100;
-
-    sf::RectangleShape playerBar(sf::Vector2f(length, 20.f));
-    playerBar.setFillColor(sf::Color::Blue);
-    playerBar.setPosition(player1Coords[0], player1Coords[1]);
-    playerBar.rotate(-90.f);
-
-    sf::RectangleShape playerBar2(sf::Vector2f(length, 20.f));
-    playerBar2.setFillColor(sf::Color::Red);
-    playerBar2.setPosition(player2Coords[0], player2Coords[1]);
-    playerBar2.rotate(-90.f);
-
-    window.draw(playerBar);
-    window.draw(playerBar2);
-
-}
-
 void drawScoreAndCenterLine(sf::RenderWindow& window, int score[2]) {
 
     sf::Font font;
@@ -79,36 +60,6 @@ void drawBall(sf::RenderWindow& window, vector<float> ballCoords, bool colision1
 
     window.draw(ball);
 }
-
-void updateBarPosition(sf::RenderWindow& window, vector<float>& barCoords) {
-    sf::Vector2f acceleration;
-    sf::Vector2f velocity;
-
-    // adjust this at will
-    const float dAcc = 3.3f;
-
-    // set acceleration
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::W) || sf::Keyboard::isKeyPressed(sf::Keyboard::Up)) { acceleration.y -= dAcc; }
-    if (sf::Keyboard::isKeyPressed(sf::Keyboard::S) || sf::Keyboard::isKeyPressed(sf::Keyboard::Down)) { acceleration.y += dAcc; }
-
-    // update velocity through acceleration
-    velocity += acceleration;
-
-    // update position through velocity
-    if (barCoords[1] + velocity.y > 1080) {
-        barCoords[1] = 1080;
-    }
-    else if (barCoords[1] + velocity.y < 100) {
-        barCoords[1] = 100;
-    }
-    else {
-        barCoords[1] += velocity.y;
-    }
-
-    // apply damping to the velocity
-    velocity = 0.50f * velocity;
-
-};
 
 bool ballBarCollision(vector<float> ballDirections, vector<float> playersBarCoords) {
 
