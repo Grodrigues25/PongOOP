@@ -47,5 +47,3 @@ void PlayerBar::updateBarPosition(sf::RenderWindow& window) {
     velocity = 0.99f * velocity;
 
 };
-
-
